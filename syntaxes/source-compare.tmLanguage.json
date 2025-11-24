@@ -3,18 +3,32 @@
 	"name": "Source Compare",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#comments"
+		},
+		{
+			"include": "#paths"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#keywords"
 		}
 	],
 	"repository": {
-		"keywords": {
+		"comments": {
 			"patterns": [{
-				"name": "keyword.control.source-compare",
-				"match": "\\b(if|while|for|return)\\b"
+				"name": "comment.line.double-slash.source-compare",
+				"match": "//.*$"
+			}, {
+				"name": "comment.block.source-compare",
+				"begin": "/\\*",
+				"end": "\\*/"
 			}]
+		},
+		"paths": {
+			"name": "string.unquoted.path.source-compare",
+			"match": "^/?[^\\s]+"
 		},
 		"strings": {
 			"name": "string.quoted.double.source-compare",
@@ -26,6 +40,12 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.source-compare",
+				"match": "\\b(if|while|for|return|function|class|import|export)\\b"
+			}]
 		}
 	},
 	"scopeName": "source.compare"
