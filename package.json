@@ -6,6 +6,10 @@
   "engines": {
     "vscode": "^1.106.1"
   },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:source-compare"
+  ],
   "categories": [
     "Programming Languages"
   ],
@@ -20,6 +24,26 @@
       "language": "source-compare",
       "scopeName": "source.compare",
       "path": "./syntaxes/source-compare.tmLanguage.json"
-    }]
+    }],
+    "configuration": {
+      "title": "SRCC Extension",
+      "properties": {
+        "srcc.autoOpenDiff": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically open diff view when opening .srcc files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.106.1",
+    "typescript": "^4.7.4"
   }
 }
