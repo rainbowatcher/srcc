@@ -1,0 +1,25 @@
+{
+  "name": "srcc",
+  "displayName": "srcc",
+  "description": "quick compare two source file",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.106.1"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "source-compare",
+      "aliases": ["Source Compare", "source-compare"],
+      "extensions": [".srcc"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "source-compare",
+      "scopeName": "source.compare",
+      "path": "./syntaxes/source-compare.tmLanguage.json"
+    }]
+  }
+}
