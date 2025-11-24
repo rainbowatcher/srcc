@@ -1,0 +1,47 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="divide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="url(#bg)" />
+  
+  <!-- Left document -->
+  <rect x="16" y="24" width="48" height="80" rx="4" fill="#ffffff" opacity="0.9" />
+  
+  <!-- Left document lines (code representation) -->
+  <rect x="20" y="32" width="24" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  <rect x="20" y="38" width="32" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  <rect x="20" y="44" width="20" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  <rect x="20" y="68" width="28" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  <rect x="20" y="74" width="36" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  <rect x="20" y="80" width="24" height="2" rx="1" fill="#1f2937" opacity="0.6" />
+  
+  <!-- Right document -->
+  <rect x="64" y="24" width="48" height="80" rx="4" fill="#ffffff" opacity="0.9" />
+  
+  <!-- Right document lines (code representation) -->
+  <rect x="68" y="32" width="24" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  <rect x="68" y="38" width="32" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  <rect x="68" y="44" width="28" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  <rect x="68" y="68" width="20" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  <rect x="68" y="74" width="36" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  <rect x="68" y="80" width="32" height="2" rx="1" fill="#dc2626" opacity="0.6" />
+  
+  <!-- Comparison divider -->
+  <rect x="62" y="28" width="4" height="72" fill="url(#divide)" rx="2" />
+  
+  <!-- Compare arrows -->
+  <path d="M58 42 L54 38 L50 42 L52 42 L52 46 L56 46 Z" fill="#ffffff" opacity="0.8" />
+  <path d="M70 42 L74 38 L78 42 L76 42 L76 46 L72 46 Z" fill="#ffffff" opacity="0.8" />
+  <path d="M58 86 L54 90 L50 86 L52 86 L52 82 L56 82 Z" fill="#ffffff" opacity="0.8" />
+  <path d="M70 86 L74 90 L78 86 L76 86 L76 82 L72 82 Z" fill="#ffffff" opacity="0.8" />
+</svg>

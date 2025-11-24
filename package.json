@@ -3,28 +3,36 @@
   "displayName": "srcc",
   "description": "quick compare two source file",
   "version": "0.0.1",
+  "icon": "icons/icon128.png",
   "engines": {
     "vscode": "^1.106.1"
   },
   "main": "./out/extension.js",
-  "activationEvents": [
-    "onLanguage:source-compare"
-  ],
+  "activationEvents": [],
   "categories": [
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
+    "languages": [
+      {
       "id": "source-compare",
-      "aliases": ["Source Compare", "source-compare"],
-      "extensions": [".srcc"],
+        "aliases": [
+          "Source Compare",
+          "source-compare"
+        ],
+        "extensions": [
+          ".srcc"
+        ],
       "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
+      }
+    ],
+    "grammars": [
+      {
       "language": "source-compare",
       "scopeName": "source.compare",
       "path": "./syntaxes/source-compare.tmLanguage.json"
-    }],
+      }
+    ],
     "configuration": {
       "title": "SRCC Extension",
       "properties": {
