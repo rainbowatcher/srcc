@@ -15,6 +15,13 @@
     "Programming Languages"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "srcc.toggleAutoOpen",
+        "title": "Toggle Auto Open",
+        "category": "SRCC"
+      }
+    ],
     "languages": [
       {
         "id": "source-compare",
