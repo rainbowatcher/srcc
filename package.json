@@ -26,14 +26,7 @@
       "configuration": "./language-configuration.json"
       }
     ],
-    "grammars": [
-      {
-      "language": "source-compare",
-      "scopeName": "source.compare",
-      "path": "./syntaxes/source-compare.tmLanguage.json"
-      }
-    ],
-    "configuration": {
+        "configuration": {
       "title": "SRCC Extension",
       "properties": {
         "srcc.autoOpenDiff": {
