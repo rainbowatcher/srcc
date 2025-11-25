@@ -4,3 +4,9 @@
 vsc-extension-quickstart.md
 out/
 test/
+node_modules/
+**/*.ts
+**/*.log
+**/*.md
+cliff.toml
+tsconfig.json
