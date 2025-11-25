@@ -7,5 +7,5 @@ export default defineConfig({
   clean: true,
   external: ["vscode"],
   platform: "node",
-  format: "cjs"
+  format: "cjs",
 })
