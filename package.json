@@ -25,7 +25,11 @@
         "extensions": [
           ".srcc"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/srcc-icon.svg",
+          "dark": "./icons/srcc-icon.svg"
+        }
       }
     ],
     "configuration": {

@@ -1,0 +1,24 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-small" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="16" height="16" rx="1" fill="url(#bg-small)" />
+  
+  <!-- Comparison symbol -->
+  <rect x="2" y="3" width="12" height="10" rx="0.5" fill="#ffffff" opacity="0.9" />
+  
+  <!-- Left and right document indicators -->
+  <rect x="3" y="4" width="2" height="1" fill="#2563eb" opacity="0.8" />
+  <rect x="9" y="4.5" width="2" height="1" fill="#dc2626" opacity="0.8" />
+  
+  <!-- Comparison arrow -->
+  <path d="M5.5 7 L6.5 6 L7.5 7 L7 7 L7 8 L6 8 Z" fill="#ffffff" opacity="0.7" />
+  
+  <!-- File corner -->
+  <path d="M2 3 L6 3 L5.5 2.5 L2 2.5 Z" fill="#1e3a8a" opacity="0.6" />
+</svg>
