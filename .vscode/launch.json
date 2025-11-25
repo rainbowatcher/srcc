@@ -13,7 +13,6 @@
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
 			"cwd": "${workspaceFolder}",
-			"postDebugTask": "openTestFolder"
 		}
 	]
 }
