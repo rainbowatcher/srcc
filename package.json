@@ -3,11 +3,13 @@
   "displayName": "srcc",
   "description": "quick compare two source file",
   "version": "0.0.1",
+  "type": "module",
   "icon": "icons/icon128.png",
   "engines": {
     "vscode": "^1.106.1"
   },
-  "main": "./out/extension.js",
+  "repository": "github:rainbowatcher/srcc",
+  "main": "./dist/extension.cjs",
   "activationEvents": [],
   "categories": [
     "Programming Languages"
@@ -15,7 +17,7 @@
   "contributes": {
     "languages": [
       {
-      "id": "source-compare",
+        "id": "source-compare",
         "aliases": [
           "Source Compare",
           "source-compare"
@@ -23,10 +25,10 @@
         "extensions": [
           ".srcc"
         ],
-      "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json"
       }
     ],
-        "configuration": {
+    "configuration": {
       "title": "SRCC Extension",
       "properties": {
         "srcc.autoOpenDiff": {
@@ -38,13 +40,23 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "vscode:prepublish": "npm run build",
+    "build": "tsdown",
+    "pack": "vsce pack",
+    "publish": "vsce publish",
+    "watch": "tsdown --watch",
+    "changelog": "git-cliff -o CHANGELOG.md",
+    "release": "bumpp"
   },
   "devDependencies": {
     "@types/node": "16.x",
     "@types/vscode": "^1.106.1",
-    "typescript": "^4.7.4"
+    "@vscode/vsce": "^3.7.1",
+    "bumpp": "^10.3.1",
+    "git-cliff": "^2.10.1",
+    "sharp": "^0.34.5",
+    "tinyexec": "^1.0.2",
+    "tsdown": "^0.16.6",
+    "typescript": "^5.9.3"
   }
 }
