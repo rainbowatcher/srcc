@@ -1,9 +1,7 @@
 import * as vscode from "vscode"
 import { parseSrcc } from "../parser"
 
-export class SrccEditorProvider
-  implements vscode.CustomReadonlyEditorProvider<vscode.CustomDocument>
-{
+export class SrccEditorProvider implements vscode.CustomTextEditorProvider {
   public static register(context: vscode.ExtensionContext): vscode.Disposable {
     return vscode.window.registerCustomEditorProvider(
       "srcc.diffView",
@@ -13,23 +11,8 @@ export class SrccEditorProvider
 
   constructor(private readonly context: vscode.ExtensionContext) {}
 
-  openCustomDocument(
-    uri: vscode.Uri,
-    openContext: vscode.CustomDocumentOpenContext,
-    token: vscode.CancellationToken,
-  ): vscode.CustomDocument {
-    // 返回最基础的 CustomDocument 对象
-    return {
-      uri,
-      dispose: () => {},
-    }
-  }
-
-  /**
-   * 当用户打开 .srcc 文件时被调用
-   */
-  async resolveCustomEditor(
-    document: vscode.CustomDocument,
+  async resolveCustomTextEditor(
+    document: vscode.TextDocument,
     webviewPanel: vscode.WebviewPanel,
     _token: vscode.CancellationToken,
   ): Promise<void> {
@@ -44,15 +27,18 @@ export class SrccEditorProvider
           "default",
         )
       } else {
-        const fileContent = await vscode.workspace.fs.readFile(document.uri)
-        const textContent = new TextDecoder().decode(fileContent)
-        const [left, right] = parseSrcc(textContent, document.uri.path)
+        const { left, right } = await parseSrcc(document)
 
-        vscode.commands.executeCommand("vscode.diff", left, right, undefined, {
-          preview: false,
-        })
+        vscode.commands.executeCommand(
+          "vscode.diff",
+          left.uri,
+          right.uri,
+          undefined,
+          {
+            preview: false,
+          },
+        )
       }
-
       // 即使 Diff 视图打开了，这个标签页依然存在，我们需要给用户展示一些有用的信息
       // webviewPanel.webview.html = this.getHtmlForWebview(left.path, right.path)
       webviewPanel.dispose()
