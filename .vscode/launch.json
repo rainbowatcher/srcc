@@ -6,10 +6,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Extension",
+			"name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
-      "preLaunchTask": "npm: build",
+      "preLaunchTask": "watch",
       "args": [
         "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}"

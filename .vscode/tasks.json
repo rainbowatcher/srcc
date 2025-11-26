@@ -1,0 +1,12 @@
+{
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "watch",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "watch",
+      "isBackground": true
+    }
+  ]
+}
