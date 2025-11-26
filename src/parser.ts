@@ -45,7 +45,7 @@ export async function parseSrccItem(
   srccFilePath: string,
 ): Promise<SrccItem> {
   const { Uri, workspace } = vscode
-  console.log(filepath, srccFilePath)
+
   const workspaceRoot = workspace.workspaceFolders?.at(0)
   const srccParent = path.dirname(srccFilePath)
 
@@ -53,7 +53,7 @@ export async function parseSrccItem(
   if (!fs.existsSync(absPath)) {
     absPath = toAbsolute(filepath, workspaceRoot?.uri.fsPath)
   }
-  console.log(absPath)
+
   if (!fs.existsSync(absPath)) {
     throw new Error("文件不存在: " + filepath)
   }
