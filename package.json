@@ -10,7 +10,7 @@
   },
   "repository": "github:rainbowatcher/srcc",
   "main": "./dist/extension.cjs",
-  "activationEvents": [],
+  "activationEvents": ["workspaceContains:**/*.srcc"],
   "categories": [
     "Programming Languages"
   ],
