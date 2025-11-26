@@ -3,8 +3,23 @@ import path from "node:path"
 import fs from "node:fs"
 import { toAbsolute } from "./utils"
 
-export function parseSrcc(content: string, filepath: string) {
-  const lines = content
+export interface SrccItem {
+  content: string
+  filename: string
+  filepath: string
+  uri: vscode.Uri
+}
+
+export interface SrccContext {
+  left: SrccItem
+  right: SrccItem
+}
+
+export async function parseSrcc(
+  document: vscode.TextDocument,
+): Promise<SrccContext> {
+  const lines = document
+    .getText()
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
@@ -19,22 +34,38 @@ export function parseSrcc(content: string, filepath: string) {
     throw new Error("SRCC文件格式错误：文件路径不能为空")
   }
 
-  console.log(`Opening diff view: ${leftFilePath} vs ${rightFilePath}`)
-
-  const srccDir = path.dirname(filepath)
-  const resolvedLeftPath = toAbsolute(leftFilePath, srccDir)
-  const resolvedRightPath = toAbsolute(rightFilePath, srccDir)
-
-  if (!fs.existsSync(resolvedLeftPath)) {
-    throw new Error(`左侧文件不存在: ${resolvedLeftPath}`)
+  return {
+    left: await parseSrccItem(leftFilePath, document.uri.fsPath),
+    right: await parseSrccItem(rightFilePath, document.uri.fsPath),
   }
-  if (!fs.existsSync(resolvedRightPath)) {
-    throw new Error(`右侧文件不存在: ${resolvedRightPath}`)
+}
+
+export async function parseSrccItem(
+  filepath: string,
+  srccFilePath: string,
+): Promise<SrccItem> {
+  const { Uri, workspace } = vscode
+  console.log(filepath, srccFilePath)
+  const workspaceRoot = workspace.workspaceFolders?.at(0)
+  const srccParent = path.dirname(srccFilePath)
+
+  let absPath = toAbsolute(filepath, srccParent)
+  if (!fs.existsSync(absPath)) {
+    absPath = toAbsolute(filepath, workspaceRoot?.uri.fsPath)
+  }
+  console.log(absPath)
+  if (!fs.existsSync(absPath)) {
+    throw new Error("文件不存在: " + filepath)
   }
 
-  // create URI
-  const leftUri = vscode.Uri.file(resolvedLeftPath)
-  const rightUri = vscode.Uri.file(resolvedRightPath)
+  const fileUri = Uri.file(absPath)
+  const fileBuffer = await workspace.fs.readFile(fileUri)
+  const content = await workspace.decode(fileBuffer)
 
-  return [leftUri, rightUri] as const
+  return {
+    content,
+    filename: path.basename(filepath),
+    filepath,
+    uri: fileUri,
+  }
 }
