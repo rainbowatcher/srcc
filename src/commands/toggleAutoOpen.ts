@@ -16,10 +16,12 @@ export async function toggleAutoOpen() {
       vscode.ConfigurationTarget.Global,
     )
 
-    const statusText = newValue ? "启用" : "禁用"
-    vscode.window.showInformationMessage(`自动打开差异视图已${statusText}`)
+    const statusText = newValue ? "enabled" : "disable"
+    vscode.window.showInformationMessage(
+      `Automatically open diff view is ${statusText}`,
+    )
   } catch (error) {
     console.error("Error toggling auto open setting:", error)
-    vscode.window.showErrorMessage("切换自动打开设置时出错")
+    vscode.window.showErrorMessage("Error switching automatic open settings")
   }
 }

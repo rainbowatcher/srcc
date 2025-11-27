@@ -11,6 +11,8 @@ export class SrccEditorProvider implements vscode.CustomTextEditorProvider {
 
   constructor(private readonly context: vscode.ExtensionContext) {}
 
+  openCustomDocument() {}
+
   async resolveCustomTextEditor(
     document: vscode.TextDocument,
     webviewPanel: vscode.WebviewPanel,
@@ -39,11 +41,10 @@ export class SrccEditorProvider implements vscode.CustomTextEditorProvider {
           },
         )
       }
-      // 即使 Diff 视图打开了，这个标签页依然存在，我们需要给用户展示一些有用的信息
-      // webviewPanel.webview.html = this.getHtmlForWebview(left.path, right.path)
+
       webviewPanel.dispose()
     } catch (error: any) {
-      // 出错时在 Webview 显示错误信息
+      // Display error information in Webview when error occurs
       webviewPanel.webview.html = `
                 <html>
                 <body style="padding: 20px; color: #f48771;">

@@ -1,9 +1,27 @@
+import vscode from "vscode"
 import * as path from "path"
 
-export function toAbsolute(filePath: string, baseDir?: string): string {
+interface ToAbsOptions {
+  uri?: boolean
+}
+
+export function toAbsolute(filePath: string, baseDir?: string): string
+export function toAbsolute(
+  filePath: string,
+  baseDir: string | undefined,
+  opts: ToAbsOptions & { uri: true },
+): vscode.Uri
+
+export function toAbsolute(
+  filePath: string,
+  baseDir?: string,
+  opts?: ToAbsOptions,
+): string | vscode.Uri {
+  const { uri = false } = opts ?? {}
   if (path.isAbsolute(filePath)) {
-    return filePath
+    return uri ? vscode.Uri.file(filePath) : filePath
   }
   const base = baseDir || process.cwd()
-  return path.resolve(base, filePath)
+  const absPath = path.resolve(base, filePath)
+  return uri ? vscode.Uri.file(absPath) : absPath
 }

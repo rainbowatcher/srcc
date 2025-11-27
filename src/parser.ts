@@ -1,6 +1,5 @@
 import * as vscode from "vscode"
 import path from "node:path"
-import fs from "node:fs"
 import { toAbsolute } from "./utils"
 
 export interface SrccItem {
@@ -25,13 +24,15 @@ export async function parseSrcc(
     .filter((line) => line.length > 0)
 
   if (lines.length < 2) {
-    throw new Error("SRCC文件格式错误：需要至少两个文件路径（每行一个）")
+    throw new Error(
+      "SRCC file format error: at least two file paths required (one per line)",
+    )
   }
 
   const [leftFilePath, rightFilePath] = lines
 
   if (!leftFilePath || !rightFilePath) {
-    throw new Error("SRCC文件格式错误：文件路径不能为空")
+    throw new Error("SRCC file format error: file paths cannot be empty")
   }
 
   return {
@@ -44,28 +45,32 @@ export async function parseSrccItem(
   filepath: string,
   srccFilePath: string,
 ): Promise<SrccItem> {
-  const { Uri, workspace } = vscode
+  const { workspace } = vscode
 
   const workspaceRoot = workspace.workspaceFolders?.at(0)
   const srccParent = path.dirname(srccFilePath)
 
-  let absPath = toAbsolute(filepath, srccParent)
-  if (!fs.existsSync(absPath)) {
-    absPath = toAbsolute(filepath, workspaceRoot?.uri.fsPath)
+  let absUri = toAbsolute(filepath, srccParent, { uri: true })
+
+  try {
+    await workspace.fs.stat(absUri)
+  } catch {
+    // Try workspace root if srcc parent doesn't work
+    absUri = toAbsolute(filepath, workspaceRoot?.uri.fsPath, { uri: true })
+    try {
+      await workspace.fs.stat(absUri)
+    } catch {
+      throw new Error(`File not found: ${filepath}`)
+    }
   }
 
-  if (!fs.existsSync(absPath)) {
-    throw new Error("文件不存在: " + filepath)
-  }
-
-  const fileUri = Uri.file(absPath)
-  const fileBuffer = await workspace.fs.readFile(fileUri)
+  const fileBuffer = await workspace.fs.readFile(absUri)
   const content = await workspace.decode(fileBuffer)
 
   return {
     content,
     filename: path.basename(filepath),
     filepath,
-    uri: fileUri,
+    uri: absUri,
   }
 }
